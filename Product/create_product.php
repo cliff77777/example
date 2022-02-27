@@ -53,10 +53,8 @@ try{
     echo "新增圖片資料庫錯誤:".$e->getMessage()."<br>";
 };
 
-hander("location:productList.php")
+$db_host = NULL;
 
-$db_host=null;
-
-
+header("location:productList.php");
 
 ?>

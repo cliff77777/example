@@ -3,6 +3,9 @@ require_once "../includes/config.php";
 $sql="SELECT * FROM brand_list ";
 $stmt=$db_host->prepare($sql);
 
+$sqlCategory="SELECT * FROM category";
+$stmtCategory=$db_host->prepare($sqlCategory);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,14 +49,25 @@ $stmt=$db_host->prepare($sql);
         </div>    
         <div class="form-group">
             <span class="">總類:</span>
-            <div class="form-check form-check-inline">
-                <label for="car" class="form-check-label ml-2">汽車</label>
-                <input type="radio" id="car" name="category" value="2" class="form-check-input">
-            </div>
-            <div class="form-check form-check-inline">
+            <?php 
+                try{
+                    $stmtCategory->execute();
+                    $rows=$stmtCategory->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($rows as $row){?>
+                <div class="form-check form-check-inline">
+                    <label for=<?=$row["category"]?> class="form-check-label ml-2"><?=$row["category"]?></label>
+                    <input type="radio" id=<?=$row["category"]?> name="category" value=<?=$row["id"]?> class="form-check-input">
+                </div>
+            <?php
+                };}catch(PDOExecption $e){
+                echo "error .<br>";
+                echo "讀取總類錯誤:".$e->getMessage()."<br>";
+                };
+                ?>       
+            <!-- <div class="form-check form-check-inline">
                 <label for="moto" class="form-check-label">機車</label>
                 <input type="radio" id="moto" name="category" value="1" class="form-check-input">
-            </div>    
+            </div>     -->
         <div class="form-group mt-3">
             <label for="price">價格:</label>
             <input type="number" id="price" name="price" class="form form-control">
