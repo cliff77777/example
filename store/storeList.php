@@ -11,7 +11,7 @@
     <?php require_once("../includes/header.php")?>
         <div class="row py-5">
             <div class="col col-lg-3">
-                <?php require_once("../includes/aside copy.php")?>
+                <?php require_once("storeAside.php")?>
             </div>
             <div class="col col-lg-9" >
                 <div class="row" id="product"></div>
@@ -22,19 +22,50 @@
     <?php require_once ("../includes/script.php")?>
 
     <script>
-function category(target){
+//取得url get 值
+    var Request = new Object();	 
+    Request = GetRequest();
+    function GetRequest() {		 
+        var url = location.search; 
+        var theRequest = new Object();		 
+        if (url.indexOf("?") != -1) {		 
+            var str = url.substr(1);		 
+            strs = str.split("&");		 
+            for(var i = 0; i < strs.length; i++) {		 
+            theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);		 
+            }		 
+        }		 
+        return theRequest;		 
+    }
+//storeAside 鏈結
             let formdata=new FormData();
-            formdata.append("id",target);
-            axios.post("../api/category_api.php",formdata).then(
-            function(response){
-                let data=response.data["category"];
-                return data;
-                }
-            )
-        };
-        axios.get("../api/product_List_api.php").then(
+            axios.post("../api/category_api.php").then(
             function(response){
                 let data=response.data;
+                content="";
+                data.forEach((category)=>{
+                    // console.log(category.category)
+                    content+=`
+                    <a href="storeList.php?category=${category.id}" class="list-group-item list-group-item-action" aria-current="true">${category.category}</a>
+                    `
+                })
+                $("#storeCategory").append(content)
+                }
+            )
+
+//獲取store資料
+        axios.get("../api/product_List_api.php", {
+            params:{
+            category: Request["category"],
+            max: Request["max"],
+            min: Request["min"],
+            search: Request["search"]
+        }
+        }).then(
+            function(response){
+                let data=response.data;
+                console.log(data)
+
                 let content="";
                 data.forEach((product)=>{
                     content+=`
@@ -59,6 +90,7 @@ function category(target){
             console.log(error);
         });
 
+        //判斷加入購物車
         $("#product").on("click","button",function(){
             let id=$(this).data("id");
             let formdata=new FormData();

@@ -90,14 +90,14 @@ require_once "../includes/config.php";
                 console.log(response);
                 let modalTotal=0;
                 let modalData=response.data;
-                modalCount="";
+                modalContent="";
                 modalData.forEach((order)=>{
                     $("#deleteID").val(order[1].orderid)
                     $("#orderNumberModal").text(order[1].orderNumber);
                     $.each(order,function(key,detail){
                         let subTotal=detail.productPrice*order[1].amount;
                         modalTotal+=subTotal;
-                        modalCount+=`
+                        modalContent+=`
                     <tr>
                         <td>${detail.productName}</td>
                         <td>${detail.amount}</td>
@@ -108,7 +108,7 @@ require_once "../includes/config.php";
                         
                     })
                 })
-                $("#modalTable").html(modalCount);
+                $("#modalTable").html(modalContent);
                 $("#modalTotal").text(modalTotal);
                 }
             )

@@ -1,12 +1,11 @@
 <?php
 require_once ("../includes/config.php");
-$id=$_POST["id"];
-$sql="SELECT * FROM category WHERE id=$id";
+$sql="SELECT * FROM category";
 $stmt=$db_host->prepare($sql);
 $stmt->execute();
 
 try{
-    $category=$stmt->fetch();
+    $category=$stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($category);
 }catch(PDOException $e){
     echo "資料庫連結失敗<br>";

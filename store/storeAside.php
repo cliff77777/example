@@ -1,4 +1,4 @@
-  <form class="form-inline mt-3" action="../product/searchProduct.php" method="get">
+  <form class="form-inline mt-3" action="storeList.php" method="get">
       <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="請輸入關鍵字" aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
           <div class="input-group-append">
@@ -20,8 +20,8 @@
 <button class="btn btn-primary my-2 " type="submit" >篩選</button>
   </form>
 
-  <div class="list-group">
-  <a href="productList.php?p=1" class="list-group-item list-group-item-action" aria-current="true">
+  <div class="list-group" id="storeCategory">
+  <a href="storeList.php" class="list-group-item list-group-item-action" aria-current="true">
 所有商品 </a>
 
 </div>
