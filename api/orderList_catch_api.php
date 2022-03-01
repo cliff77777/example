@@ -7,9 +7,21 @@ if(isset($_POST["id"])){
     $id="id";
 };
 
+// 判斷查詢區間撈取資料
+if(isset($_POST["start"]) && isset($_POST["end"])){
+    if(!empty($_POST["start"]) && !empty($_POST["end"])){
+        $start=$_POST["start"];
+        $end=$_POST["end"];
+        $sql="SELECT * FROM user_order WHERE id=$id AND order_time BETWEEN '$start' AND '$end'";
+    }else{
+        $sql="SELECT * FROM user_order WHERE id=$id";
+    };
+}else{
+    $sql="SELECT * FROM user_order WHERE id=$id";
+};
 
 //user_order
-$sql="SELECT * FROM user_order WHERE id=$id";
+// $sql="SELECT * FROM user_order WHERE id=$id";
 $stmt=$db_host->prepare($sql);
 $stmt->execute();
 

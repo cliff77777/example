@@ -18,9 +18,9 @@
         echo "<script>alert('請依正常管道進入');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
     }else{
         //寫入user_order
-        $sql="INSERT INTO user_order (user_id,order_time) VALUE(?,?)";
+        $sql="INSERT INTO user_order (user_id,order_time,orderNumber) VALUE(?,?,?)";
         $stmt=$db_host->prepare($sql);
-        $stmt->execute([$_SESSION["user"]["id"],date("Y-m-d H:i:s")]);
+        $stmt->execute([$_SESSION["user"]["id"],date("Y-m-d H:i:s"),date("YmdHis").$_SESSION["user"]["id"]]);
         $orderid=$db_host->lastInsertId();
         //寫入user_order_detail
         foreach($_SESSION["cart"] as $product){
@@ -36,7 +36,8 @@
             };
         };        
         unset($_SESSION["cart"]);
-        header("location:cart.php");
+
+        echo "<script>alert('訂單成立');location.href='../dashboard.php';</script>";
     }
 
 

@@ -1,21 +1,5 @@
 <?php
 require_once "../includes/config.php";
-
-// 判斷查詢區間撈取資料
-// if(isset($_GET["start"]) && isset($_GET["end"])){
-//     if(!empty($_GET["start"]) && !empty($_GET["end"])){
-//         $start=$_GET["start"];
-//         $end=$_GET["end"];
-//         $sql="SELECT * FROM orderdata WHERE  order_date BETWEEN'$start' AND '$end'";
-//     }else{
-//         $sql="SELECT * FROM orderdata" ;
-//     };
-// }else{
-//     $sql="SELECT * FROM orderdata" ;
-// };
-
-// $stmt=$db_host->prepare($sql);
-// $stmt->execute();
 ?>
 <!doctype html>
 <html lang="en">
@@ -39,11 +23,11 @@ require_once "../includes/config.php";
                     <label for="start" class="text-center px-2 py-2">查詢日期: </label>
                     <input type="date" name="start" id="start">
                     <input type="date" name="end" id="end">
-                    <button type="submit" class="btn btn-info ">查詢</button>
+                    <button type="submit" class="btn btn-info " id="searchDate">查詢</button>
                 </form>
             </div>
             <?php if(isset($_GET["start"]) && isset($_GET["end"]) && !empty($_GET["end"]) && !empty($_GET["end"])){?>
-            <div class="justify-content-end d-flex">查詢日期:<?=$start?>~<?=$end?></div>
+            <div class="justify-content-end d-flex">查詢日期:<?=$_GET["start"]?>~<?=$_GET["end"]?></div>
             <?php ;}?>
           <table class="table table-striped">
               <thead>
@@ -60,7 +44,33 @@ require_once "../includes/config.php";
       </div>
       <?php require_once("../includes/script.php")?>
     <script>
-        axios.post("../api/orderList_catch_api.php")
+        
+    //取得url get 值
+    var Request = new Object();	 
+    Request = GetRequest();
+    function GetRequest() {		 
+        var url = location.search; 
+        var theRequest = new Object();		 
+        if (url.indexOf("?") != -1) {		 
+            var str = url.substr(1);		 
+            strs = str.split("&");		 
+            for(var i = 0; i < strs.length; i++) {		 
+            theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);		 
+            }		 
+        }		 
+        return theRequest;		 
+    }
+        formdata=new FormData();
+        if(Request["start"]===""){
+            Request["start"]="1911-01-01"
+        }
+        if(Request["end"]===""){
+            Request["end"]="9999-09-09"
+        }
+
+        formdata.append("start",Request["start"])
+        formdata.append("end",Request["end"])
+        axios.post("../api/orderList_catch_api.php",formdata)
         .then(function(response){
             let content="";
             let data=response.data;
@@ -80,6 +90,7 @@ require_once "../includes/config.php";
         }).catch(function(error){
             console.log(error);
         })
+
         
         $("#order").on("click","button",function(){
             let formdata=new FormData();
@@ -113,7 +124,6 @@ require_once "../includes/config.php";
                 }
             )
         })
-
         
         $("#modalDeleteBtn").click(function(){
 
