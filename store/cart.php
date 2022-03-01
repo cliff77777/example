@@ -47,7 +47,7 @@ require_once("../includes/cdn.php");
                                 <td class="text-right"><?=$row["price"]?></td>
                                 <td class="text-center"><?=$value?></td>
                                 <td class="text-right"><?=$subtotal?></td>
-                                <td class="text-center border-bottom"><a href="" class="deleteBtn btn" ><i class="fas fa-trash-alt"></i></a></td>
+                                <td class="text-center border-bottom"><a class="deleteBtn btn" data-id=<?=$row["id"]?>><i class="fas fa-trash-alt"></i></a></td>
                             <?php ;}?>
                         </tr>
                     <?php ;}?>
@@ -84,6 +84,24 @@ $("#payBtn").click(function(){
         alert("請先登入會員後再進行結帳");
     }
 })
+
+$("tbody").on("click","a",function(){
+    let deleteID=$(this).data("id")
+    console.log(deleteID);
+    axios.get("../api/delete-cart_api.php",{
+        params:{
+            id:deleteID
+        }
+    }).then(function(response){
+        let result=response.data;
+        if(result.status===0){
+            alert("商品刪除成功");
+            location.reload();
+        }
+
+    })
+})
+
 </script>
 
 </body>

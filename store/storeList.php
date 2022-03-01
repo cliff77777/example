@@ -64,8 +64,6 @@
         }).then(
             function(response){
                 let data=response.data;
-                console.log(data)
-
                 let content="";
                 data.forEach((product)=>{
                     content+=`
@@ -75,9 +73,9 @@
                         <figure>
                             <img  class="cover-fit" alt="${product.name}"src="/example/img/product/${product.picture}" >
                         </figure>
-                        <div class="">價格:${product.price}</div>
-                        <div class="" id="reserve">庫存:${product.count}</div>
-                            <button type="button" class="btn btn-primary btn-block add-cart" data-id="${product.id}"><i class="fas fa-cart-plus"></i></button>
+                        <div>價格:${product.price}</div>
+                        <div>庫存:${product.count}</div>
+                            <button type="button" class="btn btn-primary btn-block add-cart" data-id="${product.id}" data-count="${product.count}""><i class="fas fa-cart-plus"></i></button>
                         <form>
                     </div>
                 </div>
@@ -92,6 +90,10 @@
 
         //判斷加入購物車
         $("#product").on("click","button",function(){
+            let productCount=$(this).data("count");
+            if(productCount==0){
+                alert("已售完");
+            }else{
             let id=$(this).data("id");
             let formdata=new FormData();
             formdata.append("id",id);
@@ -107,9 +109,8 @@
                         $("#amount").text(amount);
                     }                    
                 }).catch(function(error){
-
             });
-        })
+        }})
     </script>
   </body>
 </html>
