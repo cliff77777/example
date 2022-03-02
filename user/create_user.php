@@ -50,7 +50,7 @@ try{
     if($_SESSION["user"]["role"]===0){
         header('location:userList.php');
     }else{
-        header('location:/example/dashboard.php');
+        echo "<script>alert('帳號已完成註冊，請重新登入');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
     }
     
 }catch(PDOException $e){
