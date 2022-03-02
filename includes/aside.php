@@ -21,7 +21,7 @@
   </form>
 
   <div class="list-group">
-  <a href="productList.php?p=1" class="list-group-item list-group-item-action" aria-current="true">
+  <a href="productList.php?p=1" class="list-group-item list-group-item-action" aria-current="true" id="allCategory">
 所有商品 </a>
 <?php foreach($category as $key => $value){?>
   <a href="category.php?ct=<?=$key?>" class="list-group-item list-group-item-action" name="ct"><?=$value?></a>

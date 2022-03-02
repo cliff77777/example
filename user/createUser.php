@@ -10,6 +10,7 @@
     <?php require_once("../includes/cdn.php");?>
 </head>
 <body>
+<?php require_once("../includes/adminRole.php");?>
 <?php require_once ("../includes/header.php"); ?>
     <div class="container mt-5">
         <h2 class="pt-5 mw-100 mx-auto">新增使用者</h2>

@@ -57,6 +57,7 @@ while($rowCategory=$stmtCategory->fetch()){
     <link rel="stylesheet" href="../style.css">
   </head>
   <body>
+    <?php require("../includes/adminRole.php");?>
     <div class="container mt-5">
     <?php require("../includes/header.php"); ?>
       <div class="d-flex justify-content-between py-3">
