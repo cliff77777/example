@@ -13,6 +13,7 @@ require_once "../includes/config.php";
     <?php require_once("../includes/cdn.php")?>
   </head>
   <body>
+    <?php require_once("../includes/adminRole.php");?>
       <?php require "../includes/header.php"?>
       <?php require "orderModal.php"?>
 
