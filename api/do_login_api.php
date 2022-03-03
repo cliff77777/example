@@ -16,7 +16,7 @@ if(isset($_SESSION["dataError"])){
     $beginTime=intval($_SESSION["dataError"]["beginTime"]);
     if($_SESSION["dataError"]["time"] >= 3 && $beginTime < $expireTime){
         unset($_SESSION["dataError"]);
-    }elseif($_SESSION["dataError"]["time"] >= 3){
+    }elseif($_SESSION["dataError"]["time"] > 2){
             $dataError=array(
                 "message"=>"輸入錯誤已達上限，請於1分鐘後嘗試登入，鎖定期間嘗試登入將重置鎖定時間",
                 "time"=>3,

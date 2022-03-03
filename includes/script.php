@@ -17,8 +17,9 @@
                         console.log("status:0")
                         location.href="";
                         alert("登入成功")
-                    }else if(response.data.time>=3){
-                        console.log("3",response.data.message)
+                    }else if(response.data.time > 2){
+                        $("#errormsg").text(response.data.message+"，次數"+response.data.time+"次")
+                    }else if(response.data.time =3){
                         $("#errormsg").text(response.data.message);
                     }else{
                         $("#errormsg").text(response.data.message+"，次數"+response.data.time+"次")
@@ -28,19 +29,4 @@
                     console.log(error)
                 });
             })
-
-
-          //         switch(status){
-            //                 case 0:location.href=""
-            //             break;
-            //                 case 2:$("#errormsg").text(response.data.message+"，次數"+response.data.time+"次")
-            //             break;
-            //                 case 3:$("#errormsg").text(response.data.message+"，次數"+response.data.time+"次")
-            //             break ;
-            //         }
-            //     }).catch(function (error) {
-            //         console.log(error)
-            //     });
-            // })
-
 </script>
