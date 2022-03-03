@@ -188,16 +188,24 @@
 
           $("#updateUserBtn").click(function(){
             let checkSpace=$(".changeUse").text();
-            if(checkSpace===""){
+            let originName=$("#name").attr("value");
+            let originEmail=$("#email").attr("value");
+            let originPhone=$("#phone").attr("value");
+
+            if(originName === $("#name").val() && originEmail === $("#email").val() && originPhone === $("#phone").val()){
+              alert("會員資料沒有修改");
+
+            }else if(checkSpace===""){
               $("#finalErrorMsg").text("")
               console.log("pass")
               $("#updataUserForm").submit()
-
             }else{
               $("#finalErrorMsg").text("請檢查紅字錯誤後再嘗試送出修改")
             }
 
           })
+
+
 
       </script>
   </body>
