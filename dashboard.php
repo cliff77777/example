@@ -202,8 +202,25 @@
             }else{
               $("#finalErrorMsg").text("請檢查紅字錯誤後再嘗試送出修改")
             }
-
           })
+
+          //cart 刪除
+          $("tbody").on("click","a",function(){
+            let deleteID=$(this).data("id")
+            console.log(deleteID);
+            axios.get("api/delete-cart_api.php",{
+                params:{
+                    id:deleteID
+                }
+            }).then(function(response){
+                let result=response.data;
+                if(result.status===0){
+                    alert("商品刪除成功");
+                    location.reload();
+                }
+
+            })
+        })
 
 
 

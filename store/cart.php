@@ -20,7 +20,7 @@ require_once("../includes/cdn.php");
             <table class="table  table-sm ">
                 <thead>
                 <?php 
-                    if(!isset($_SESSION["cart"])): ?><div class="h1 text-center">沒有商品</div><?php
+                    if(!isset($_SESSION["cart"]) || empty($_SESSION["cart"])): ?><div class="h1 text-center">沒有商品</div><?php
                         else:?>
                     <tr>
                         <td>商品</td>
@@ -58,20 +58,11 @@ require_once("../includes/cdn.php");
                             </td>
                         </tr>
                     </tfoot>
-                    <?php endif?>
                 </tbody>
             </table>
-            <?php
-            if(isset($_SESSION["cart"])):            
-            ?>
             <div class="justify-content-between d-flex">
             <a href="javascript:history.back()" class="btn btn-info">返回</a>
             <a href="pay.php" role="button" class="btn btn-primary" id="payBtn">結帳</a>
-            </div>
-            <?php else :?>
-                <div class="justify-content-end d-flex">
-                <a href="javascript:history.back()" class="btn btn-info">返回</a>
-                </div>
             <?php endif; ?>           
         </div>
     </div>
