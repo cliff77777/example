@@ -10,6 +10,8 @@ var_dump($_SESSION["user"]);
 
 // var_dump($_SESSION["doMsg"]);
 echo "</br>";
+var_dump($_SESSION["dataError"]);
+
 
 // var_dump($_SESSION["chabgePassword"]);
 

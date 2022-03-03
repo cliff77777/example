@@ -10,15 +10,16 @@
         let formdata=new FormData();
         formdata.append("account",account);
         formdata.append("password",password);
-
-
-
         axios.post('/example/api/do_login_api.php',formdata)
                 .then(function(response){
                     let status=response.data.status;
                     if(status===0){
                         console.log("status:0")
-                        location.href=""
+                        location.href="";
+                        alert("登入成功")
+                    }else if(response.data.time>=3){
+                        console.log("3",response.data.message)
+                        $("#errormsg").text(response.data.message);
                     }else{
                         $("#errormsg").text(response.data.message+"，次數"+response.data.time+"次")
                         console.log("status:",response.data.status);

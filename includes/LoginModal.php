@@ -11,11 +11,11 @@
       <div class="modal-body">
           <div class="form-group">
             <label for="account" class="col-form-label">帳號:</label>
-            <input type="text" class="form-control" id="account" name="account">
+            <input type="text" class="form-control" id="account" name="account" required>
           </div>
           <div class="form-group">
             <label for="password" class="col-form-label">密碼:</label>
-            <input type="password" class="form-control" id="password" name="password"></input>
+            <input type="password" class="form-control" id="password" name="password" required></input>
             <div class="errormsg">
             <small class="text-danger errormsg" id="errormsg"></small>
             </div>
